@@ -1,7 +1,6 @@
 const sliderItems = Array.from(document.getElementsByClassName("slider__item"));
 const sliderDots = Array.from(document.getElementsByClassName("slider__dot"));
-let activeSlide = 0;
-sliderDots.at(activeSlide).className += " slider__dot_active";
+sliderDots.at(0).className += " slider__dot_active";
 
 const sliderArrowPrev = document.querySelector(".slider__arrow_prev");
 const sliderArrowNext = document.querySelector(".slider__arrow_next");
@@ -30,8 +29,11 @@ function activateSlide (sign, event) {
     // Обработчик события 'click' для боковых кнопок слайдера изображений и навигационных точек.
     // При смене "влево" боковыми кнопками крайнего левого слайда - перекидывает к крайнему правому, и наоборот.
     // При нажатии на навигационную точку переключается на соответствующий слайд.
+    let activeSlide = sliderItems.findIndex((sliderItem) => {
+        return sliderItem.className.includes("slider__item_active");
+    });
     hideAllSlides();
-    deactivationAllDots ()
+    deactivationAllDots();
     switch(sign) {
         case "-":
             activeSlide--;
